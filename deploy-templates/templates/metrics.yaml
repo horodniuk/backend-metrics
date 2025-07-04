@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: metrics-dev
+  labels:
+    release: prometheus-operator
+spec:
+  endpoints:
+    - interval: 10s
+      path: /actuator/prometheus
+      port: http
+  selector:
+    matchLabels:
+      app.kubernetes.io/instance: backend-metrics
+      app.kubernetes.io/name: backend-metrics
